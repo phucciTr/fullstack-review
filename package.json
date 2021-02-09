@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "react-dev": "webpack -d --watch",
-    "server-dev": "nodemon server/index.js"
+    "server-dev": "nodemon server/index.js",
+    "startcli": "npm run react-dev",
+    "startser": "npm run server-dev",
+    "bundle": "npm run react-dev & npm run server-dev"
   },
   "author": "Beth Johnson",
   "license": "ISC",
