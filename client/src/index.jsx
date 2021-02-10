@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import $ from 'jquery';
+import searchUser from './ajax/request.js';
 import Search from './components/Search.jsx';
 import RepoList from './components/RepoList.jsx';
 
@@ -17,13 +17,7 @@ class App extends React.Component {
     console.log(`${term} was searched`);
 
     // TODO
-    $.ajax({
-      url: 'http://localhost:1128/repos',
-      type: 'POST',
-      data: { data: term },
-      success: () => console.log(`search for ${term} sucessfully sent to server`),
-      error: () => console.log(`search request for ${term} failed`)
-    });
+    searchUser(term);
   }
 
   render () {
