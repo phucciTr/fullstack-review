@@ -1,8 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const { getReposByUsername } = require('./../helpers/github');
 
 const app = express();
 const port = 1128;
+
+console.log('getReposByUsername = ', getReposByUsername);
 
 
 app.use(express.static(__dirname + '/../client/dist'));
@@ -14,8 +17,11 @@ app.post('/repos', function (req, res) {
   // This route should take the github username provided
   // and get the repo information from the github API, then
   // save the repo information in the database
-
-  console.log('req.body.data = ', req.body.data);
+  let name = req.body.data;
+  
+  getReposByUsername(name, (res) => {
+    console.log('res = ', res);
+  });
 });
 
 app.get('/repos', function (req, res) {
