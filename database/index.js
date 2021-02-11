@@ -11,6 +11,7 @@ let repoSchema = mongoose.Schema({
   repoDescription: String,
   forksCount: Number,
   starsCount: Number,
+  ratingAve: Number
 });
 
 let Repo = mongoose.model('Repo', repoSchema);
@@ -38,7 +39,8 @@ var filterRepos = (repos) => {
       'avatarUrl': repo.owner.avatar_url,
       'repoDescription': repo.description,
       'forksCount': repo.forks_count,
-      'starsCount': repo.watchers
+      'starsCount': repo.watchers,
+      'ratingAve': (repo.forks_count + repo.watchers) / 2
     };
   });
 
