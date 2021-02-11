@@ -23,10 +23,10 @@ let Repo = mongoose.model('Repo', repoSchema);
 // TODO: Your code here
 // This function should save a repo or repos to
 // the MongoDB
-let save = (repos) => {
+let save = (repos, cb) => {
   Repo.insertMany(filterRepos(repos))
-    .then(() => console.log('data inserted'))
-    .catch((err) => console.log('err = ', err));
+    .then(() => cb(null, repos[0].owner.login))
+    .catch((err) => cb(err, null));
 };
 
 

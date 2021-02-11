@@ -3,6 +3,9 @@ const bodyParser = require('body-parser');
 const { getReposByUsername } = require('./../helpers/github');
 const db = require('./../database/index');
 
+const Promise = require('bluebird');
+const saveToDb = Promise.promisify(db.save);
+
 const app = express();
 const port = 1128;
 
@@ -16,9 +19,13 @@ app.post('/repos', function (req, res) {
   // and get the repo information from the github API, then
   // save the repo information in the database
   let name = req.body.data;
-
-  getReposByUsername(name, (userRepos) => db.save(userRepos));
   res.sendStatus(201);
+
+  getReposByUsername(name, (userRepos) => {
+    saveToDb((userRepos))
+      .then((user) => console.log(`${user} repos saved to db`))
+      .catch((err) => console.log('err = ', err));
+  });
 });
 
 app.get('/repos', function (req, res) {
