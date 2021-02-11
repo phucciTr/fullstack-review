@@ -25,7 +25,8 @@ let Repo = mongoose.model('Repo', repoSchema);
 // the MongoDB
 let save = (repos) => {
   repos.forEach((repo) => {
-    new Repo(repo).save().then((result) => console.log(`${result._doc.owner} saved to db`))
+    new Repo(repo).save()
+      .then((result) => console.log(`${result._doc.owner} saved to db`))
       .catch((err) => console.log('err = ', err));
   });
 };

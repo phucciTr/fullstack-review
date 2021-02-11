@@ -15,23 +15,12 @@ let getReposByUsername = (name, cb) => {
     }
   };
 
-  // axios(options).then((res) => cb(res.data))
-  //   .catch((err) => console.log('err = ', err));
+  axios(options)
+    .then((res) => cb(filterRepos(res.data)))
+    .catch((err) => console.log('err = ', err));
+};
 
-    axios(options)
-      .then((res) => {
-
-        // // let filteredData = filterData(res.data);
-        // // console.log('filteredData = ', filteredData);
-
-        // cb(res.data);
-        cb(filterData(res.data));
-      })
-      .catch((err) => console.log('err = ', err));
-
-}
-
-var filterData = (repos) => {
+var filterRepos = (repos) => {
   return repos.map((repo) => {
     return {
       'owner': repo.full_name,
