@@ -16,22 +16,8 @@ let getReposByUsername = (name, cb) => {
   };
 
   axios(options)
-    .then((res) => cb(filterRepos(res.data)))
+    .then((res) => cb(res.data))
     .catch((err) => console.log('err = ', err));
-};
-
-var filterRepos = (repos) => {
-  return repos.map((repo) => {
-    return {
-      'owner': repo.full_name,
-      'repoUrl': repo.html_url,
-      'avatarUrl': repo.owner.avatar_url,
-      'repoDescription': repo.description,
-      'forksCount': repo.forks_count,
-      'starsCount': repo.watchers
-    };
-  });
-
 };
 
 module.exports.getReposByUsername = getReposByUsername;

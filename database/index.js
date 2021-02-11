@@ -17,19 +17,31 @@ let Repo = mongoose.model('Repo', repoSchema);
 
 
 // TO DROP A COLLECTION from A MODEL
-// Repo.remove({}, () => console.log('data removed'));
+Repo.remove({}, () => console.log('data removed'));
 
 
 // TODO: Your code here
 // This function should save a repo or repos to
 // the MongoDB
 let save = (repos) => {
-  repos.forEach((repo) => {
-    new Repo(repo).save()
-      .then((result) => console.log(`${result._doc.owner} saved to db`))
-      .catch((err) => console.log('err = ', err));
-  });
+  Repo.insertMany(filterRepos(repos))
+    .then(() => console.log('data inserted'))
+    .catch((err) => console.log('err = ', err));
 };
 
+
+var filterRepos = (repos) => {
+  return repos.map((repo) => {
+    return {
+      'owner': repo.full_name,
+      'repoUrl': repo.html_url,
+      'avatarUrl': repo.owner.avatar_url,
+      'repoDescription': repo.description,
+      'forksCount': repo.forks_count,
+      'starsCount': repo.watchers
+    };
+  });
+
+};
 
 module.exports.save = save;
