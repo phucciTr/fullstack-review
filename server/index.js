@@ -1,12 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { getReposByUsername } = require('./../helpers/github');
+const db = require('./../database/index');
 
 const app = express();
 const port = 1128;
-
-console.log('getReposByUsername = ', getReposByUsername);
-
 
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json());
@@ -19,9 +17,8 @@ app.post('/repos', function (req, res) {
   // save the repo information in the database
   let name = req.body.data;
 
-  getReposByUsername(name, (userRepos) => {
-    console.log('userRepos = ', userRepos);
-  });
+  getReposByUsername(name, (userRepos) => db.save(userRepos));
+  res.sendStatus(201);
 });
 
 app.get('/repos', function (req, res) {

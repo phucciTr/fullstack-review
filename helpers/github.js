@@ -15,9 +15,34 @@ let getReposByUsername = (name, cb) => {
     }
   };
 
-  axios(options).then((res) => cb(res.data))
-    .catch((err) => console.log('err = ', err));
+  // axios(options).then((res) => cb(res.data))
+  //   .catch((err) => console.log('err = ', err));
+
+    axios(options)
+      .then((res) => {
+
+        // // let filteredData = filterData(res.data);
+        // // console.log('filteredData = ', filteredData);
+
+        // cb(res.data);
+        cb(filterData(res.data));
+      })
+      .catch((err) => console.log('err = ', err));
 
 }
+
+var filterData = (repos) => {
+  return repos.map((repo) => {
+    return {
+      'owner': repo.full_name,
+      'repoUrl': repo.html_url,
+      'avatarUrl': repo.owner.avatar_url,
+      'repoDescription': repo.description,
+      'forksCount': repo.forks_count,
+      'starsCount': repo.watchers
+    };
+  });
+
+};
 
 module.exports.getReposByUsername = getReposByUsername;
