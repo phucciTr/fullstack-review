@@ -17,7 +17,7 @@ let Repo = mongoose.model('Repo', repoSchema);
 
 
 // TO DROP A COLLECTION from A MODEL
-Repo.remove({}, () => console.log('data removed'));
+// Repo.remove({}, () => console.log('data removed'));
 
 
 // TODO: Your code here
