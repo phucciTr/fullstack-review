@@ -1,3 +1,5 @@
+const Promise = require('bluebird');
+
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/fetcher', () => {
   // mongoose.connection.db.dropDatabase(); // drop schema
@@ -20,6 +22,15 @@ let Repo = mongoose.model('Repo', repoSchema);
 // TO DROP A COLLECTION from A MODEL
 // Repo.remove({}, () => console.log('data removed'));
 
+
+let getTop25 = (cb) => {
+  Repo.find({})
+  .sort({ratingAve: -1})
+  .limit(25)
+  .select('owner repoUrl avatarUrl repoDescription ratingAve')
+  .then((repos) => cb(null, repos))
+  .catch((err) => cb(err, null));
+};
 
 // TODO: Your code here
 // This function should save a repo or repos to
@@ -46,4 +57,5 @@ var filterRepos = (repos) => {
 
 };
 
-module.exports.save = save;
+module.exports.save = Promise.promisify(save);
+module.exports.getTop25 = Promise.promisify(getTop25);

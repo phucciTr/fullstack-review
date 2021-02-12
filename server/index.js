@@ -1,10 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const { getReposByUsername } = require('./../helpers/github');
+const gh = require('./../helpers/github');
 const db = require('./../database/index');
-
-const Promise = require('bluebird');
-const saveToDb = Promise.promisify(db.save);
 
 const app = express();
 const port = 1128;
@@ -21,8 +18,8 @@ app.post('/repos', function (req, res) {
   let name = req.body.data;
   res.sendStatus(201);
 
-  getReposByUsername(name, (userRepos) => {
-    saveToDb((userRepos))
+  gh.getReposByUsername(name, (userRepos) => {
+    db.save((userRepos))
       .then((user) => console.log(`${user} repos saved to db`))
       .catch((err) => console.log('err = ', err));
   });
@@ -31,6 +28,9 @@ app.post('/repos', function (req, res) {
 app.get('/repos', function (req, res) {
   // TODO - your code here!
   // This route should send back the top 25 repos
+  db.getTop25()
+    .then((repos) => res.status(200).json(repos))
+    .catch((err) => res.status(400));
 });
 
 app.listen(port, function() {
