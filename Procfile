@@ -1,1 +1,1 @@
-web: npm run startser 
+web: node server/index.js
