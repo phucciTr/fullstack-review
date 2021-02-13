@@ -4,11 +4,15 @@ const gh = require('./../helpers/github');
 const db = require('./../database/index');
 
 const app = express();
-const port = 1128;
+const PORT = process.env.PORT || 1128;
 
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('/../client/dist'));
+}
 
 app.post('/repos', function (req, res) {
   let name = req.body.data;
@@ -32,7 +36,7 @@ app.get('/repos', function (req, res) {
     .catch((err) => res.status(400));
 });
 
-app.listen(port, function() {
-  console.log(`listening on port ${port}`);
+app.listen(PORT, function() {
+  console.log(`listening on port ${PORT}`);
 });
 

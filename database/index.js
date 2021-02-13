@@ -1,7 +1,7 @@
 const Promise = require('bluebird');
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/fetcher', () => {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/fetcher', () => {
   // mongoose.connection.db.dropDatabase(); // drop schema
 });
 
