@@ -11,12 +11,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.post('/repos', function (req, res) {
-  // TODO - your code here!
-  // This route should take the github username provided
-  // and get the repo information from the github API, then
-  // save the repo information in the database
   let name = req.body.data;
-  // res.sendStatus(201);
 
   gh.getReposByUsername(name, (userRepos) => {
     db.save((userRepos))
@@ -32,8 +27,6 @@ app.post('/repos', function (req, res) {
 });
 
 app.get('/repos', function (req, res) {
-  // TODO - your code here!
-  // This route should send back the top 25 repos
   db.getTop25()
     .then((repos) => res.status(200).json(repos))
     .catch((err) => res.status(400));
