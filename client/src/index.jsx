@@ -18,7 +18,10 @@ class App extends React.Component {
   }
 
   search (term) {
-    request.searchUser(term);
+    request.searchUser(term, (name) => {
+      console.log(`${name} was succesfully searched`);
+      request.getTop25((repos) => this.setState({ repos: repos }));
+    });
   }
 
   render () {

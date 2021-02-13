@@ -3,17 +3,22 @@
   height: 100px;
 }
 
-.rating {
-  position: absolute;
-  left: 120px;
-}
-
-#forks {
+.forks {
   position: relative;
   top: 20px;
 }
 
-#stars {
+.about {
+  position: relative;
+  left: 120px;
+}
+
+.stars {
   position: relative;
   top: 10px;
+}
+
+.rating, .about {
+  position: relative;
+  bottom: 25px;
 }

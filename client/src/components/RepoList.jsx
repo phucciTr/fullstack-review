@@ -8,7 +8,7 @@ const RepoList = (props) => (
 
     <table>
       {props.repos.map((repo) =>
-        <Repo avatar={repo.avatarUrl} owner={repo.owner} url={repo.repoUrl} forks={repo.forksCount} stars={repo.starsCount} about={repo.repoDescription} />
+        <Repo avatar={repo.avatarUrl} owner={repo.owner} url={repo.repoUrl} forks={repo.forksCount} stars={repo.starsCount} about={repo.repoDescription} key={repo._id}/>
       )}
     </table>
 

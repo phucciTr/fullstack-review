@@ -2,12 +2,12 @@ import $ from 'jquery';
 
 var request = {
 
-  searchUser: (name) => {
+  searchUser: (name, cb) => {
     $.ajax({
       url: 'http://localhost:1128/repos',
       type: 'POST',
       data: { data: name },
-      success: () => console.log(`search for ${name} sucessfully sent to server`),
+      success: cb.bind(this, name),
       error: () => console.log(`search request for ${name} failed`)
     });
   },
@@ -21,18 +21,6 @@ var request = {
     });
   }
 };
-
-
-
-// var searchUser = (term) => {
-//   $.ajax({
-//     url: 'http://localhost:1128/repos',
-//     type: 'POST',
-//     data: { data: term },
-//     success: () => console.log(`search for ${term} sucessfully sent to server`),
-//     error: () => console.log(`search request for ${term} failed`)
-//   });
-// };
 
 
 export default request;

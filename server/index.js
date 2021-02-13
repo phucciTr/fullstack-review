@@ -16,12 +16,18 @@ app.post('/repos', function (req, res) {
   // and get the repo information from the github API, then
   // save the repo information in the database
   let name = req.body.data;
-  res.sendStatus(201);
+  // res.sendStatus(201);
 
   gh.getReposByUsername(name, (userRepos) => {
     db.save((userRepos))
-      .then((user) => console.log(`${user} repos saved to db`))
-      .catch((err) => console.log('err = ', err));
+      .then((user) => {
+        console.log(`${user} repos saved to db`);
+        res.sendStatus(201);
+      })
+      .catch((err) => {
+        console.log('saving repos err = ', err);
+        res.sendStatus(201);
+      });
   });
 });
 
