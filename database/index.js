@@ -25,9 +25,9 @@ let Repo = mongoose.model('Repo', repoSchema);
 
 let getTop25 = (cb) => {
   Repo.find({})
-  .sort({ratingAve: -1})
+  .sort({ ratingAve: -1 })
   .limit(25)
-  .select('owner repoUrl avatarUrl repoDescription ratingAve')
+  .select('-ratingAve')
   .then((repos) => cb(null, repos))
   .catch((err) => cb(err, null));
 };

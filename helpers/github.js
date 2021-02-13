@@ -17,7 +17,7 @@ let getReposByUsername = (name, cb) => {
 
   axios(options)
     .then((res) => cb(res.data))
-    .catch((err) => console.log('err = ', err));
+    .catch((err) => console.log('axios = ', err));
 };
 
 module.exports.getReposByUsername = getReposByUsername;

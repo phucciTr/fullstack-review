@@ -1,0 +1,19 @@
+.ava {
+  width: 100px;
+  height: 100px;
+}
+
+.rating {
+  position: absolute;
+  left: 120px;
+}
+
+#forks {
+  position: relative;
+  top: 20px;
+}
+
+#stars {
+  position: relative;
+  top: 10px;
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import searchUser from './ajax/request.js';
+import request from './ajax/request.js';
 import Search from './components/Search.jsx';
 import RepoList from './components/RepoList.jsx';
 
@@ -13,19 +13,22 @@ class App extends React.Component {
 
   }
 
-  search (term) {
-    console.log(`${term} was searched`);
+  componentDidMount() {
+    request.getTop25((repos) => this.setState({ repos: repos }));
+  }
 
-    // TODO
-    searchUser(term);
+  search (term) {
+    request.searchUser(term);
   }
 
   render () {
-    return (<div>
-      <h1>Github Fetcher</h1>
-      <RepoList repos={this.state.repos}/>
-      <Search onSearch={this.search.bind(this)}/>
-    </div>)
+    return (
+      <div>
+        <h1>Github Fetcher</h1>
+        <Search onSearch={this.search.bind(this)}/>
+        <RepoList repos={this.state.repos}/>
+      </div>
+    )
   }
 }
 
