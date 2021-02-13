@@ -4,7 +4,7 @@ var request = {
 
   searchUser: (name, cb) => {
     $.ajax({
-      url: 'http://localhost:1128/repos',
+      url: '/repos',
       type: 'POST',
       data: { data: name },
       success: cb.bind(this, name),
@@ -14,7 +14,7 @@ var request = {
 
   getTop25: (successCb) => {
     $.ajax({
-      url: 'http://localhost:1128/repos',
+      url: '/repos',
       type: 'GET',
       success: successCb,
       error: () => console.log('failed to get repos')
