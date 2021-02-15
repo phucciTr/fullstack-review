@@ -1,8 +1,19 @@
 const Promise = require('bluebird');
-
 const mongoose = require('mongoose');
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/fetcher', () => {
-  // mongoose.connection.db.dropDatabase(); // drop schema
+const { MONGODB_URI } = require('./../config.js');
+
+
+mongoose.connect(MONGODB_URI || 'mongodb://localhost/fetcher', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+// mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/fetcher', () => {
+//   // mongoose.connection.db.dropDatabase(); // drop schema
+// });
+
+mongoose.connection.on('connected', () => {
+  console.log('mongoose is connected');
 });
 
 // TODO: your schema here!
@@ -56,6 +67,7 @@ var filterRepos = (repos) => {
   });
 
 };
+
 
 module.exports.save = Promise.promisify(save);
 module.exports.getTop25 = Promise.promisify(getTop25);
