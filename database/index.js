@@ -3,18 +3,19 @@ const mongoose = require('mongoose');
 const { MONGODB_URI } = require('./../config.js');
 
 
-mongoose.connect(MONGODB_URI || 'mongodb://localhost/fetcher', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/fetcher', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+});
+
+mongoose.connection.on('connected', () => {
+  console.log('mongoose is connected');
 });
 
 // mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/fetcher', () => {
 //   // mongoose.connection.db.dropDatabase(); // drop schema
 // });
 
-mongoose.connection.on('connected', () => {
-  console.log('mongoose is connected');
-});
 
 // TODO: your schema here!
 let repoSchema = mongoose.Schema({
