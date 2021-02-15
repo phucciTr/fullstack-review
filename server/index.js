@@ -10,9 +10,9 @@ app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('/../client/dist'));
-}
+// if (process.env.NODE_ENV === 'production') {
+//   app.use(express.static('/../client/dist'));
+// }
 
 app.post('/repos', function (req, res) {
   let name = req.body.data;
