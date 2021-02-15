@@ -3,7 +3,12 @@ const mongoose = require('mongoose');
 // const { MONGODB_URI } = require('./../config.js');
 
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/fetcher', {
+// mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/fetcher', {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
+
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
