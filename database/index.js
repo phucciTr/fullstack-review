@@ -1,13 +1,5 @@
 const Promise = require('bluebird');
 const mongoose = require('mongoose');
-// const { MONGODB_URI } = require('./../config.js');
-// require('dotenv').config();
-
-
-// mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/fetcher', {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// });
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/fetcher', {
   useNewUrlParser: true,
@@ -18,9 +10,7 @@ mongoose.connection.on('connected', () => {
   console.log('mongoose is connected');
 });
 
-// mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/fetcher', () => {
-//   // mongoose.connection.db.dropDatabase(); // drop schema
-// });
+// mongoose.connect('mongodb://localhost/fetcher', () => mongoose.connection.db.dropDatabase()); // Drop schema
 
 
 // TODO: your schema here!
@@ -37,8 +27,7 @@ let repoSchema = mongoose.Schema({
 let Repo = mongoose.model('Repo', repoSchema);
 
 
-// TO DROP A COLLECTION from A MODEL
-// Repo.remove({}, () => console.log('data removed'));
+// Repo.remove({}, () => console.log('data removed')); // TO DROP A COLLECTION from A MODEL
 
 
 let getTop25 = (cb) => {
@@ -50,9 +39,6 @@ let getTop25 = (cb) => {
   .catch((err) => cb(err, null));
 };
 
-// TODO: Your code here
-// This function should save a repo or repos to
-// the MongoDB
 let save = (repos, cb) => {
   Repo.insertMany(filterRepos(repos))
     .then(() => cb(null, repos[0].owner.login))
