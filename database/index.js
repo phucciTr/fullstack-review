@@ -1,7 +1,7 @@
 const Promise = require('bluebird');
 const mongoose = require('mongoose');
 // const { MONGODB_URI } = require('./../config.js');
-require('dotenv').config();
+// require('dotenv').config();
 
 
 // mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/fetcher', {

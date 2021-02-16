@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const gh = require('./../helpers/github');
 const db = require('./../database/index');
-require('dotenv').config();
+// require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 1128;
