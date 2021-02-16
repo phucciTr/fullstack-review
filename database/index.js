@@ -1,6 +1,7 @@
 const Promise = require('bluebird');
 const mongoose = require('mongoose');
 // const { MONGODB_URI } = require('./../config.js');
+require('dotenv').config();
 
 
 // mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/fetcher', {
@@ -8,7 +9,7 @@ const mongoose = require('mongoose');
 //   useUnifiedTopology: true,
 // });
 
-mongoose.connect(process.env.MONGODB_URI, {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/fetcher', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
